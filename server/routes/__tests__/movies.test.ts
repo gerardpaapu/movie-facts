@@ -251,7 +251,7 @@ describe('search', () => {
 })
 
 describe('deleting a movie', () => {
-  it('adds a movie to the database', async () => {
+  it('removes a movie from the database', async () => {
     vi.mocked(delete$).mockResolvedValue()
     const res = await request(server).delete('/api/v1/movies/2')
     expect(res.statusCode).toBe(200)

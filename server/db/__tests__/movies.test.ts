@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-standalone-expect */
 // @vitest-environment node
 
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest'

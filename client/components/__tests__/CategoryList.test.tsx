@@ -1,12 +1,8 @@
 /** @jest-environment jsdom */
 import nock from 'nock'
-import App from '../AppLayout'
-import { Provider } from 'react-redux'
-import { MemoryRouter as Router } from 'react-router-dom'
-import { initialiseStore } from '../../store'
 
 import { describe, it, expect, afterEach } from 'vitest'
-import { render, screen, waitFor, cleanup } from '@testing-library/react'
+import { screen, waitFor, cleanup } from '@testing-library/react'
 
 import matchers from '@testing-library/jest-dom/matchers'
 import { setup } from '../../test-utils'

@@ -1,13 +1,9 @@
 // @vitest-environment jsdom
 
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import nock from 'nock'
-import App from '../AppLayout'
-import { Provider } from 'react-redux'
-import { MemoryRouter as Router } from 'react-router-dom'
-import { initialiseStore } from '../../store'
 
-import { screen, render, cleanup, waitFor } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import { setup } from '../../test-utils'
 
 /**

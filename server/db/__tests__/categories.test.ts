@@ -1,12 +1,4 @@
-import {
-  describe,
-  it,
-  expect,
-  beforeAll,
-  beforeEach,
-  afterAll,
-  vi,
-} from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 
 import connection from '../../db/connection'
 import * as categories from '../categories'

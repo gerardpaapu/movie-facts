@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
@@ -16,6 +16,7 @@ import {
 import userEvent from '@testing-library/user-event'
 
 import matchers from '@testing-library/jest-dom/matchers'
+import { setup } from '../../test-utils'
 
 expect.extend(matchers)
 
@@ -34,13 +35,7 @@ describe('<CreateMovieForm />', () => {
       .post('/api/v1/movies')
       .reply(200, { id: 3, title: 'Big', release_year: 1984 })
 
-    render(
-      <Router initialEntries={['/movie']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    setup('/movie')
 
     const form = await screen.findByRole('form', { name: 'Create movie' })
     expect(form).toBeInTheDocument()
@@ -84,13 +79,7 @@ describe('<CreateMovieForm />', () => {
 
     const scope2 = nock('http://localhost').post('/api/v1/movies').reply(500)
 
-    render(
-      <Router initialEntries={['/movie']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    setup('/movie')
 
     const form = await screen.findByRole('form', { name: 'Create movie' })
     expect(form).toBeInTheDocument()

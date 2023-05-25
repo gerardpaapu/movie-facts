@@ -1,12 +1,13 @@
 // @vitest-environment jsdom
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
 import { describe, it, expect, afterEach } from 'vitest'
 import { screen, render, cleanup } from '@testing-library/react'
 import matchers from '@testing-library/jest-dom/matchers'
+import { setup } from '../../test-utils'
 expect.extend(matchers)
 
 afterEach(cleanup)
@@ -20,13 +21,7 @@ describe('<MovieList />', () => {
         { id: 2, title: 'Some Movie', release_year: 2021 },
       ])
 
-    render(
-      <Router initialEntries={['/movie']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    setup('/movie')
 
     const title = await screen.findByRole('link', {
       name: 'Some Movie (2021)',
@@ -38,13 +33,7 @@ describe('<MovieList />', () => {
   it('fails to show a list of movies', async () => {
     const scope = nock('http://localhost').get('/api/v1/movies').reply(500)
 
-    render(
-      <Router initialEntries={['/movie']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    setup('/movie')
 
     const errorMessage = await screen.findByText(/Error: Internal Server Error/)
     expect(errorMessage).toBeVisible()

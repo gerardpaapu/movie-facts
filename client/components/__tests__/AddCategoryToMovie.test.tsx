@@ -2,7 +2,7 @@
 import nock from 'nock'
 import { describe, it, expect } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
-import setup from '../../test-utils'
+import { setup } from '../../test-utils'
 
 describe('Add category to movie', () => {
   it('sends a request and updates UI', async () => {

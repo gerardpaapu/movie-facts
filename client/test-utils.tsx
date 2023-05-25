@@ -1,23 +1,25 @@
 import { afterEach, expect } from 'vitest'
 import { cleanup, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter as Router } from 'react-router-dom'
+import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { initialiseStore } from './store'
 import matchers from '@testing-library/jest-dom/matchers'
-import App from './components/App'
+import { routes } from './routes'
 
 expect.extend(matchers)
 
 afterEach(cleanup)
 
-export default function setup(location = '/') {
+export function setup(location = '/') {
+  const router = createMemoryRouter(routes, {
+    initialEntries: [location],
+  })
+
   const container = render(
-    <Router initialEntries={[location]}>
-      <Provider store={initialiseStore()}>
-        <App />
-      </Provider>
-    </Router>
+    <Provider store={initialiseStore()}>
+      <RouterProvider router={router} />
+    </Provider>
   )
 
   const user = userEvent.setup()

@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
 import { describe, it, expect, afterEach } from 'vitest'
 import { render, screen, cleanup } from '@testing-library/react'
+import { setup } from '../../test-utils'
 
 import matchers from '@testing-library/jest-dom/matchers'
 
@@ -34,13 +35,7 @@ describe('<Category />', () => {
         name: 'Thriller',
       })
 
-    const { container } = render(
-      <Router initialEntries={['/category/4']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    const { container } = setup('/category/4')
 
     await screen.findByText(/Black Swan/)
     expect(container).toMatchSnapshot()

@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
@@ -9,6 +9,7 @@ import { describe, it, expect, afterEach } from 'vitest'
 import { render, screen, waitFor, cleanup } from '@testing-library/react'
 
 import matchers from '@testing-library/jest-dom/matchers'
+import { setup } from '../../test-utils'
 
 expect.extend(matchers)
 
@@ -57,13 +58,7 @@ describe('<Category />', () => {
         },
       ])
 
-    const { container } = render(
-      <Router initialEntries={['/category']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    const { container } = setup('/category')
 
     await waitFor(() => expect(scope.isDone()).toBe(true))
     expect(container).toMatchSnapshot()
@@ -72,13 +67,7 @@ describe('<Category />', () => {
   it('Handles errors', async () => {
     const scope = nock('http://localhost').get('/api/v1/categories').reply(500)
 
-    const { container } = render(
-      <Router initialEntries={['/category']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    const { container } = setup('/category')
 
     await screen.findByText(/Error! /)
     expect(scope.isDone()).toBe(true)

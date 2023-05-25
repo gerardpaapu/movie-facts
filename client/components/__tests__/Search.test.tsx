@@ -2,13 +2,13 @@
 
 import { describe, it, expect, afterEach } from 'vitest'
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
 
 import { screen, render, cleanup, waitFor } from '@testing-library/react'
-import setupApp from '../../test-utils'
+import { setup } from '../../test-utils'
 
 /**
  * For our components we're mostly going to write integration tests, running
@@ -32,7 +32,7 @@ describe('<Search />', () => {
       .get('/api/v1/categories')
       .reply(200, [{ id: 1, name: 'Drama' }])
 
-    setupApp('/search')
+    setup('/search')
 
     const checkbox = await screen.findByLabelText('Drama')
     expect(checkbox).toBeInTheDocument()
@@ -45,7 +45,7 @@ describe('<Search />', () => {
       .get('/api/v1/categories')
       .reply(200, [{ id: 1, name: 'Drama' }])
 
-    setupApp('/search')
+    setup('/search')
 
     expect(scope.isDone()).not.toBeTruthy()
     const loadingText = screen.queryByText(/Loading categories/)
@@ -55,7 +55,7 @@ describe('<Search />', () => {
   it('shows an error when failing to load categories', async () => {
     nock('http://localhost').get('/api/v1/categories').reply(500)
 
-    setupApp('/search')
+    setup('/search')
 
     const errorMessage = await screen.findByText(/Failed to load categories/)
     expect(errorMessage).toBeVisible()
@@ -69,7 +69,7 @@ describe('<Search />', () => {
         { id: 2, name: 'Comedy' },
       ])
 
-    const { user } = setupApp('/search')
+    const { user } = setup('/search')
 
     const checkbox = await screen.findByLabelText('Comedy')
     expect(checkbox).toBeInTheDocument()
@@ -109,7 +109,7 @@ describe('<Search />', () => {
         { id: 2, name: 'Comedy' },
       ])
 
-    const { user } = setupApp('/search')
+    const { user } = setup('/search')
 
     await waitFor(() => expect(scope1.isDone()).toBe(true))
 
@@ -143,7 +143,7 @@ describe('<Search />', () => {
         { id: 2, name: 'Comedy' },
       ])
 
-    const { user } = setupApp('/search')
+    const { user } = setup('/search')
 
     const checkbox = await screen.findByLabelText('Comedy')
     expect(checkbox).toBeInTheDocument()
@@ -187,7 +187,7 @@ describe('<Search />', () => {
         { id: 2, name: 'Comedy' },
       ])
 
-    const { user } = setupApp('/search')
+    const { user } = setup('/search')
 
     await waitFor(() => expect(scope1.isDone()).toBe(true))
 

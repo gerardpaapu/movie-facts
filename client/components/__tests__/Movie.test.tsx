@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
@@ -8,6 +8,7 @@ import { initialiseStore } from '../../store'
 import { describe, it, expect, afterEach } from 'vitest'
 import { screen, render, cleanup } from '@testing-library/react'
 import matchers from '@testing-library/jest-dom/matchers'
+import { setup } from '../../test-utils'
 expect.extend(matchers)
 
 afterEach(cleanup)
@@ -37,13 +38,7 @@ describe('<Movie />', () => {
         },
       ])
 
-    const { container } = render(
-      <Router initialEntries={['/movie/12']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    const { container } = setup('/movie/12')
 
     await screen.findByRole('form', { name: 'Add category to movie' })
     expect(scope.isDone()).toBe(true)
@@ -64,13 +59,7 @@ describe('<Movie />', () => {
         },
       ])
 
-    const { container } = render(
-      <Router initialEntries={['/movie/23934']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    const { container } = setup('/movie/23934')
 
     const loadingIndicator = await screen.findByText(/Failed/)
     expect(loadingIndicator).toBeVisible()

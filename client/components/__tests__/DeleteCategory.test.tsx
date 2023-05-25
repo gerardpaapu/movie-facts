@@ -1,6 +1,6 @@
 // @vitest-environment jsdom */
 import nock from 'nock'
-import App from '../App'
+import App from '../AppLayout'
 import { Provider } from 'react-redux'
 import { MemoryRouter as Router } from 'react-router-dom'
 import { initialiseStore } from '../../store'
@@ -14,6 +14,7 @@ import {
 } from '@testing-library/react'
 
 import matchers from '@testing-library/jest-dom/matchers'
+import { setup } from '../../test-utils'
 expect.extend(matchers)
 
 afterEach(cleanup)
@@ -43,13 +44,7 @@ describe('Delete category from movie', () => {
         },
       ])
 
-    render(
-      <Router initialEntries={['/movie/12']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    setup('/movie/12')
 
     const deleteButton = await screen.findByRole('button', {
       name: 'delete category Drama',
@@ -90,13 +85,7 @@ describe('Delete category from movie', () => {
         },
       ])
 
-    render(
-      <Router initialEntries={['/movie/12']}>
-        <Provider store={initialiseStore()}>
-          <App />
-        </Provider>
-      </Router>
-    )
+    setup('/movie/12')
 
     const deleteButton = await screen.findByRole('button', {
       name: 'delete category Drama',

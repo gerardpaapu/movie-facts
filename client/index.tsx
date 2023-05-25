@@ -5,12 +5,11 @@ import store from './store'
 
 import App from './components/App'
 
-document.addEventListener('DOMContentLoaded', () => {
-  createRoot(document.getElementById('app') as HTMLElement).render(
-    <Router>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </Router>
-  )
-})
+const root = createRoot(document.getElementById('app') as HTMLElement)
+root.render(
+  <Router>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </Router>
+)

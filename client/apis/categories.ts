@@ -1,4 +1,4 @@
-import { Category } from '../../common/Movie'
+import { Category } from '../../models/Movie'
 import request from 'superagent'
 
 export async function all() {

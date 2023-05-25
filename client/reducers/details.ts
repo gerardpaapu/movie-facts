@@ -1,4 +1,4 @@
-import { Movie } from '../../common/Movie'
+import { Movie } from '../../models/Movie'
 import { DetailsAction } from '../actions/details'
 
 interface DetailsState {

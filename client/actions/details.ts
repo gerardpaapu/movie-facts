@@ -1,4 +1,4 @@
-import { Category, Movie } from '../../common/Movie'
+import { Category, Movie } from '../../models/Movie'
 import { ThunkAction } from '../store'
 import * as api from '../apis/movies'
 

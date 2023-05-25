@@ -1,5 +1,5 @@
 import * as api from '../apis/movies'
-import { Movie } from '../../common/Movie'
+import { Movie } from '../../models/Movie'
 import type { ThunkAction } from '../store'
 
 export type MovieAction =

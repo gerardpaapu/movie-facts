@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Category } from '../../common/Movie'
+import { Category } from '../../models/Movie'
 import { useAppDispatch, useAppSelector } from './redux'
 import * as actions from '../actions/details'
 

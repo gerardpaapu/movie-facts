@@ -1,5 +1,5 @@
 import * as api from '../apis/categories'
-import { Category } from '../../common/Movie'
+import { Category } from '../../models/Movie'
 import type { ThunkAction } from '../store'
 
 export type CategoryAction =

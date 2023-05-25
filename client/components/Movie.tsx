@@ -1,6 +1,6 @@
 import { UIEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Category } from '../../common/Movie'
+import { Category } from '../../models/Movie'
 import AddCategoryForm from './AddCategoryForm'
 import useDetails from '../hooks/useDetails'
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Category as CategoryData } from '../../common/Movie'
+import { Category as CategoryData } from '../../models/Movie'
 import * as api from '../apis/categories'
 
 export default function Category() {

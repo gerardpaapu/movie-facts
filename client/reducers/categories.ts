@@ -1,4 +1,4 @@
-import { Category } from '../../common/Movie'
+import { Category } from '../../models/Movie'
 import { CategoryAction } from '../actions/categories'
 
 interface CategoryState {

@@ -1,5 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from 'react'
-import { Category } from '../../common/Movie'
+import { Category } from '../../models/Movie'
 import useCategories from '../hooks/useCategories'
 
 interface Props {

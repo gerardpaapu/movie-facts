@@ -1,4 +1,4 @@
-import { Movie } from '../../common/Movie'
+import { Movie } from '../../models/Movie'
 import { SearchAction } from '../actions/search'
 
 interface SearchState {

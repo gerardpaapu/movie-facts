@@ -32,7 +32,7 @@ module.exports = {
   production: {
     client: 'postgres',
     connection: {
-      filename: process.env.DATABASE_URL,
+      connectionString: process.env.DATABASE_URL,
     },
   },
 }

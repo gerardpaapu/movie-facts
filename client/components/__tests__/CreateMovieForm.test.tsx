@@ -52,11 +52,9 @@ describe('<CreateMovieForm />', () => {
       .get('/api/v1/categories')
       .reply(200, [{ id: 1, name: 'Drama' }])
     await waitFor(() => expect(scope3.isDone()).toBe(true))
-
+    const big = await screen.findByRole('heading', { name: 'Big (1984)' })
     // after the movie is created we navigate to it
-    expect(
-      screen.getByRole('heading', { name: 'Big (1984)' })
-    ).toBeInTheDocument()
+    expect(big).toBeInTheDocument()
   })
 
   it('Shows an error message when the server is sad', async () => {
